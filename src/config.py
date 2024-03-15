@@ -11,5 +11,5 @@ try:
 except:
     raise Exception('Create an .env file on the project root with the api key')
 
-FEATURE_GROUP_NAME = 'time_series_hourly_feature_group'
+FEATURE_GROUP_NAME = 'time_series_hourly_feature_group_1'
 FEATURE_GROUP_VERSION = 1
