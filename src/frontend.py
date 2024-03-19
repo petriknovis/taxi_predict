@@ -52,24 +52,24 @@ def load_shape_data_file():
 
 with st.spinner(text="Downloading shape file to plot taxi zones"):
     geo_df = load_shape_data_file()
-    st.sidebar.write("Shape file was downloaded")
+    st.sidebar.write("Shape file was downloaded. (Done)")
     progress_bar.progress(1/N_STEPS)
 
 #connect to feature store
 with st.spinner(text="Fetching batch of interence data"):
     features = load_batch_of_features_from_store(current_date)
-    st.sidebar.write('Inference features fetched from sthe store')
+    st.sidebar.write('Inference features fetched from sthe store. (Done)')
     progress_bar.progress(2/N_STEPS)
     
 #load model from registry
 with st.spinner(text='Loading ML model from the registry'):
     model = load_model_from_registry()
-    st.sidebar.write('ML model was loaded from registry')
+    st.sidebar.write('ML model was loaded from registry. (Done)')
     progress_bar.progress(3/N_STEPS)
 
 with st.spinner(text="Computing model predictions"):
     results = get_model_predictions(model, features)
-    st.sidebar.write('Model predictions arrived')
+    st.sidebar.write('Model predictions arrived. (Done)')
     progress_bar.progress(4/N_STEPS)
 
 with st.spinner(text="Preparing data to plot"):
@@ -83,7 +83,7 @@ with st.spinner(text="Preparing data to plot"):
     BLACK, GREEN = (0, 0, 0), (0, 255, 0)
     df['color_scaling'] = df['predicted_demand']
     max_pred, min_pred = df['color_scaling'].max(), df['color_scaling'].min()
-    df['fill_color'] = df['color_scaling'].apply(lambda x: pseuocolor(x, min_pred, max_pred))
+    df['fill_color'] = df['color_scaling'].apply(lambda x: pseuocolor(x, min_pred, max_pred, BLACK, GREEN))
     progress_bar.progress(5/N_STEPS)
     
 #now we create a map
@@ -126,14 +126,14 @@ with st.spinner(text="Generating NYC MAP"):
 #top 10 areas in demand
 with st.spinner(text='Plotting time-series data'):
     row_indeces = np.argsort(results['predicted_demand'].values)[::-1]
-    n_to_plot = 1
+    n_to_plot = 10
 
     for row_id in row_indeces[:n_to_plot]:
         fig = plot_one_sample(
             features=features,
             targets=results['predicted_demand'],
             example_id=row_id,
-            predictions=pd.Series(results['predict_demand'])
+            predictions=pd.Series(results['predicted_demand'])
         )
         st.plotly_chart(fig, theme='streamlit', use_container_width=True, width=0)
 

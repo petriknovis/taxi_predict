@@ -18,4 +18,5 @@ FEATURE_VIEW_VERSION = 1
 
 N_FEATURES = 24 * 28
 
-MODEL_NAME = "taxi_demand_predictor"
+MODEL_NAME = "taxi_demand_predictor_next_hour"
+MODEL_VERSION = 1

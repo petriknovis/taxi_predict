@@ -59,17 +59,14 @@ def load_batch_of_features_from_store(
     ###
     #now we need to transform it to vector of features
 
+    print(f'{ts_data=}')
+
 
     location_ids = ts_data['pickup_location_id'].unique()
-    print(len(ts_data))
-    print(len(location_ids))
-    print(n_features)
-    print(n_features * len(location_ids))
     assert len(ts_data) == n_features * len(location_ids),  "Time-series data is not complete."
     
     # sort data by location and time
     ts_data.sort_values(by=['pickup_location_id', 'pickup_hour'], inplace=True)
-    print(f'{ts_data=}')
 
     x = np.ndarray(shape=(len(location_ids), n_features), dtype=np.float32)
     for i, location_id in enumerate(location_ids):
