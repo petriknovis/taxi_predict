@@ -111,6 +111,9 @@ def load_predictions_from_store(
     from config import FEATURE_VIEW_PREDICTIONS_METADATA
     from feature_store_api import get_or_create_feature_view
 
+    print(from_pickup_hour)
+    print(to_pickup_hour)
+
     # get pointer to the feature view
     predictions_fv = get_or_create_feature_view(FEATURE_VIEW_PREDICTIONS_METADATA)
 

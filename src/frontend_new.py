@@ -72,8 +72,11 @@ with st.spinner(text="Fetching model predictionns from the store"):
     st.sidebar.write('Model predictions arrived (Done)')
     progress_bar.progress(2/N_STEPS)
 
+print('=====================')
+print(current_date -timedelta(hours=1) )
 print(current_date)
-print(predictions_df.head(10), 'alo bre')
+print('=====================')
+print(predictions_df.head(10), 'data?')
 
 #here we are checking the predictions for the current hour have already been computed
 #and are available
